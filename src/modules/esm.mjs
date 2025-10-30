@@ -9,12 +9,12 @@ const __dirname = path.dirname(__filename);
 
 const random = Math.random();
 
-let unknownObject;
+let module;
 
 if (random > 0.5) {
-  unknownObject = await import("./files/a.json", { assert: { type: "json" } });
+  module = await import("./files/a.json", { with: { type: "json" } });
 } else {
-  unknownObject = await import("./files/b.json", { assert: { type: "json" } });
+  module = await import("./files/b.json", { with: { type: "json" } });
 }
 
 console.log(`Release ${release()}`);
@@ -30,11 +30,11 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.log(unknownObject);
+console.log(module);
 
 myServer.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
   console.log("To terminate it, use Ctrl+C combination");
 });
 
-export { unknownObject, myServer };
+export { module, myServer };
